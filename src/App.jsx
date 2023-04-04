@@ -1,140 +1,69 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import SearchInput from "./components/SearchInput";
+import Spinner from "./components/Spinner";
+import GamesCard from "./components/GamesCard";
+import Pagination from "./components/Pagination";
+import Footer from "./components/Footer";
+
 function App() {
+  const [games, setGames] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setIsLoading] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage, setGamesPerPage] = useState(4);
+
+  useEffect(() => {
+    const use = async () => {
+      setIsLoading(true);
+      const games = await axios("http://localhost:3000/api/games");
+      const categories = await axios("http://localhost:3000/api/collection");
+      if (categories.status !== 200)
+        return alert("Error cargando la informacion de categorias");
+      if (games.status !== 200)
+        return alert("Error cargando la informacion de juegos");
+      setGames(games.data);
+      setCategories(categories.data);
+      setIsLoading(false);
+    };
+    use();
+  }, []);
+
+  async function handleFilter(categoryName = "") {
+    setGames([]);
+    setIsLoading(true);
+    const { data: gamesFilter } = await axios(
+      "http://localhost:3000/api/games"
+    );
+    let filterList = gamesFilter.filter(
+      ({ category }) => category.name === categoryName
+    );
+    if (categoryName !== "TODOS") {
+      setGames(filterList);
+    } else {
+      setGames(gamesFilter);
+    }
+    setIsLoading(false);
+  }
+
+  const lastGamesIndex = currentPage * gamesPerPage;
+  const firstGamesIndex = lastGamesIndex - gamesPerPage;
+  const gamesFinal = games.slice(firstGamesIndex, lastGamesIndex);
+
   return (
     <div className="container mx-auto p-10">
       <h1 className="text-3xl text-center mb-4">Krapy</h1>
-      <div className="flex justify-center w-3/6 mx-auto gap-2">
-        <input
-          type="text"
-          placeholder="Busca aqui tu juego preferido..."
-          className="w-full p-2 rounded outline-none text-black"
-        />
-        <button className="bg-indigo-500 p-2 rounded">Buscar</button>
-      </div>
-
-      <div className="grid grid-cols-12 text-center mt-10 gap-4">
-        <div className="col-span-6">
-          <h2>PC</h2>
-          <table className="w-full border-collapse border">
-            <thead className="border-b">
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Descuento</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>GTA V</td>
-                <td className="bg-green-700 fw-bold">40%</td>
-                <td className="bg-yellow-500 font-bold">$27990</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-            <tfoot className="text-end">
-              <tr>
-                <td>Sum</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-
-        <div className="col-span-6">
-          <h2>PC</h2>
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Descuento</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>GTA V</td>
-                <td>40%</td>
-                <td>27990</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Sum</td>
-                <td>$180</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-
-        <div className="col-span-6">
-          <h2>PC</h2>
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Descuento</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>GTA V</td>
-                <td>40%</td>
-                <td>27990</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className="col-span-6">
-          <h2>PC</h2>
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Descuento</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>GTA V</td>
-                <td>40%</td>
-                <td>27990</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <SearchInput categories={categories} handleFilter={handleFilter} />
+      {!!loading && <Spinner />}
+      <GamesCard games={gamesFinal} />
+      <Pagination
+        totalGames={games.length}
+        gamesPerPage={gamesPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
+      <Footer />
     </div>
   );
 }
