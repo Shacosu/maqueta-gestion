@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="container mx-auto p-10">
-      <h1 className="text-3xl text-center mb-4">Krapy</h1>
+      <h1 className="text-3xl text-center mb-4">Krapy games chile</h1>
       <SearchInput categories={categories} handleFilter={handleFilter} />
       {!!loading && <Spinner />}
       <GamesCard games={gamesFinal} />
