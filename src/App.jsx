@@ -6,6 +6,8 @@ import GamesCard from "./components/GamesCard";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
 
+
+
 function App() {
   const [games, setGames] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,12 +15,25 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesPerPage, setGamesPerPage] = useState(4);
+  /* Asignación de direciónes para juegos y categorias */
+  const gamesPath = "http://mi.zapto.org:3000/api/games";
+  const categoriesPath = "http://mi.zapto.org:3000/api/collection";
+  /* Variables para busqueda*/
+  const [inputText, setInputText] = useState("");
+
+  /* funcion para busqueda */
+  function inputHandler(e) {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+    print(lowerCase)
+  }
 
   useEffect(() => {
     const use = async () => {
       setIsLoading(true);
-      const games = await axios("http://localhost:3000/api/games");
-      const categories = await axios("http://localhost:3000/api/collection");
+      const games = await axios(gamesPath);
+      const categories = await axios(categoriesPath);
       if (categories.status !== 200)
         return alert("Error cargando la informacion de categorias");
       if (games.status !== 200)
@@ -34,7 +49,7 @@ function App() {
     setGames([]);
     setIsLoading(true);
     const { data: gamesFilter } = await axios(
-      "http://localhost:3000/api/games"
+      gamesPath
     );
     let filterList = gamesFilter.filter(
       ({ category }) => category.name === categoryName
@@ -52,9 +67,9 @@ function App() {
   const gamesFinal = games.slice(firstGamesIndex, lastGamesIndex);
 
   return (
-    <div className="container mx-auto p-10">
-      <h1 className="text-3xl text-center mb-4">Krapy games chile</h1>
-      <SearchInput categories={categories} handleFilter={handleFilter} />
+    <div>
+      <div className="container mx-auto p-10">
+      <SearchInput categories={categories} handleFilter={handleFilter} inputHandler={inputHandler}/>
       {!!loading && <Spinner />}
       <GamesCard games={gamesFinal} />
       <Pagination
@@ -65,7 +80,11 @@ function App() {
       />
       <Footer />
     </div>
+
+    </div>
+    
   );
 }
 
 export default App;
+
