@@ -67,7 +67,7 @@ function App() {
   const gamesFinal = games.slice(firstGamesIndex, lastGamesIndex);
 
   return (
-    <div>
+    <div className="fondos">
       <div className="container mx-auto p-10">
       <SearchInput categories={categories} handleFilter={handleFilter} inputHandler={inputHandler}/>
       {!!loading && <Spinner />}

@@ -19,7 +19,9 @@ export default function GamesCard({ games }) {
           <span>{updatedAt.substring(0, 10)} / {updatedAt.substring(11, 19)}</span>
           <p className="font-bold">Categoría: </p>
           <span>{category.name}</span>
-          <a href={url} target="_blank" className="block text-center bg-purple-800 p-1 text-white uppercase font-bold mt-2">Ir a la página</a>
+          <a href={url} target="_blank" className="block text-center bg-purple-800 p-1 text-white uppercase font-bold mt-2">juegosdigitaleschile</a>
+          <a href={url} target="_blank" className="block text-center bg-purple-800 p-1 text-white uppercase font-bold mt-2">eneba</a>
+          <a href={url} target="_blank" className="block text-center bg-purple-800 p-1 text-white uppercase font-bold mt-2">chilejuegosdigitales</a>
 
         </div>
       </div>
