@@ -1,6 +1,12 @@
 import React from 'react'
 
-export default function GamesCard({ games }) {
+export default function GamesCard({ games, inputText, setGames}) {
+if(inputText !== ""){
+    games = games.filter((game) => {
+        return game.title.toLowerCase().includes(inputText.toLowerCase())
+    })
+    
+}
   return (
     <div className='grid grid-cols-12 gap-4 mt-5 min-h-screen'>
     {games.map(({_id, title, description, price, provider, updatedAt, url, image, category }) => (
@@ -9,7 +15,6 @@ export default function GamesCard({ games }) {
           <img src={image} alt={`img-${title}`} className="h-[18rem] w-full object-fit"  />
           {/* <span className="absolute top-0 end-0 bg-yellow-500 p-2 rounded cursor-pointer">❤️</span>fgdhgrf */}
         </picture>
-
         <div className="bg-white min-h-[6rem] border-t-4 border-indigo-500 rounded-b text-sm text-black p-2">
           <p className="font-bold">Proveedor: </p>
           <span>{provider}</span>

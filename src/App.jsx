@@ -5,7 +5,7 @@ import Spinner from "./components/Spinner";
 import GamesCard from "./components/GamesCard";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
-import List from "./components/List";
+
 
 
 function App() {
@@ -60,33 +60,15 @@ function App() {
     /* Variables para busqueda*/
     const [gamesList, setGamesList ] = useState("");
     const [inputText, setInputText] = useState("");
-    /* funcion para busqueda */
-    function inputHandler(e) {
-      //convert input text to lower case
-      var lowerCase = e.target.value.toLowerCase();
-      setInputText(lowerCase);
-      console.log(e.target.value)
-      
-      filtar(lowerCase)
-    }
-    /* funcion para filtrar busqueda*/
-    const filtar=(inputText)=>{
-      var resultado = gamesList.filter((game)=>{
-        if(game.title.toLowerCase().includes(inputText.toLowerCase)){
-          console.log(game.title)
-          return game
-        }
-        })
-        /* console.log("Gamelist:"+gamesList) */
-        setGamesList(resultado)
-    }
+
+    
 
   return (
     <div>
       <div className="container mx-auto p-10">
-      <SearchInput categories={categories} handleFilter={handleFilter} inputHandler={inputHandler} />
+      <SearchInput categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
       {!!loading && <Spinner />}
-      <GamesCard games={gamesFinal} />
+      <GamesCard games={games} inputText={inputText} setGames={setGames}/>
       <Pagination
         totalGames={games.length}
         gamesPerPage={gamesPerPage}
