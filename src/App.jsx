@@ -18,16 +18,6 @@ function App() {
   /* Asignación de direciónes para juegos y categorias */
   const gamesPath = "http://mi.zapto.org:3000/api/games";
   const categoriesPath = "http://mi.zapto.org:3000/api/collection";
-  /* Variables para busqueda*/
-  const [inputText, setInputText] = useState("");
-
-  /* funcion para busqueda */
-  function inputHandler(e) {
-    //convert input text to lower case
-    var lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase);
-    print(lowerCase)
-  }
 
   useEffect(() => {
     const use = async () => {
@@ -39,6 +29,7 @@ function App() {
       if (games.status !== 200)
         return alert("Error cargando la informacion de juegos");
       setGames(games.data);
+      setGamesList(games.data)
       setCategories(categories.data);
       setIsLoading(false);
     };
@@ -66,12 +57,18 @@ function App() {
   const firstGamesIndex = lastGamesIndex - gamesPerPage;
   const gamesFinal = games.slice(firstGamesIndex, lastGamesIndex);
 
+    /* Variables para busqueda*/
+    const [gamesList, setGamesList ] = useState("");
+    const [inputText, setInputText] = useState("");
+
+    
+
   return (
     <div className="fondos">
       <div className="container mx-auto p-10">
-      <SearchInput categories={categories} handleFilter={handleFilter} inputHandler={inputHandler}/>
+      <SearchInput categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
       {!!loading && <Spinner />}
-      <GamesCard games={gamesFinal} />
+      <GamesCard games={games} inputText={inputText} setGames={setGames}/>
       <Pagination
         totalGames={games.length}
         gamesPerPage={gamesPerPage}

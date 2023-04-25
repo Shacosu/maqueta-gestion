@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SearchInput({ categories, handleFilter, inputHandler }) {
+export default function SearchInput({ categories, handleFilter, setInputText}) {
   return (
     <div>
     <div className="flex justify-center items-center gap-2">
@@ -10,11 +10,12 @@ export default function SearchInput({ categories, handleFilter, inputHandler }) 
         <input
         type="text"
         placeholder="Busca aqui tu juego preferido..."
+        onChange={(e) => setInputText(e.target.value)}
         className="p-2 rounded outline-none w-3/6 text-black"
         />
-        
-        <button className="bg-purple-800 p-2  rounded" onChange={() => inputHandler}>Buscar</button>
-        </div>
+        <button className="bg-purple-800 p-2  rounded" >Buscar</button>
+
+    </div>
         <div className="flex  mt-5 justify-center gap-10">
         {categories.map(({ _id, name}) => (
           <div key={_id}>
