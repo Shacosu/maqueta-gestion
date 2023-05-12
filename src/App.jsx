@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SearchInput from "./components/SearchInput";
 import Spinner from "./components/Spinner";
 import GamesCard from "./components/GamesCard";
 import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
-
+import Header from "./components/Header";
+import LoadingBar from 'react-top-loading-bar'
 
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesPerPage, setGamesPerPage] = useState(4);
+
+
+  const ref = useRef(null);
   /* Asignación de direciónes para juegos y categorias */
   const gamesPath = "http://mi.zapto.org:3000/api/games";
   const categoriesPath = "http://mi.zapto.org:3000/api/collection";
@@ -36,9 +40,13 @@ function App() {
     use();
   }, []);
 
+  const startSpinner = () => ref.current.continuousStart();
+  const stopSpinner = () => ref.current.complete();
+
   async function handleFilter(categoryName = "") {
     setGames([]);
     setIsLoading(true);
+    startSpinner()
     const { data: gamesFilter } = await axios(
       gamesPath
     );
@@ -50,6 +58,7 @@ function App() {
     } else {
       setGames(gamesFilter);
     }
+    stopSpinner();
     setIsLoading(false);
   }
 
@@ -65,9 +74,9 @@ function App() {
 
   return (
     <div className="fondos">
+      <Header categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
       <div className="container mx-auto p-10">
-      <SearchInput categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
-      {!!loading && <Spinner />}
+      <LoadingBar color="#f11946" ref={ref} shadow={true} />
       <GamesCard games={games} inputText={inputText} setGames={setGames}/>
       <Pagination
         totalGames={games.length}
