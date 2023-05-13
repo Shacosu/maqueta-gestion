@@ -38,7 +38,20 @@ export default function GamesCard({ games, inputText, setGames }) {
             <span className="font-bold bg-purple-800 text-white px-2"><CurrencyFormat value={price} displayType={'text'} thousandSeparator="." decimalSeparator="" prefix={'$'} renderText={value => value} /></span>
             <label className="font-bold mb-2 block">Categorías: </label>
             <span className="bg-green-500 text-white px-4 py-1 font-bold">{category.name}</span>
-            <a href={url} target="_blank" className="block text-center bg-purple-800 p-1 text-white uppercase font-bold mt-2">{provider}</a>
+            <div>
+              {(() => {
+                switch (provider) {
+                  case "juegosdigitaleschile.com": 
+                  return <a href={url} target="_blank" className="block text-center bg-yellow-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  case "chilejuegosdigitales.cl":
+                  return <a href={url} target="_blank" className="block text-center bg-red-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  case "eneba.com":
+                  return <a href={url} target="_blank" className="block text-center bg-purple-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  default:
+                    return <a href={url} target="_blank" className="block text-center bg-green-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                }
+              })()}
+            </div>
           </div>
         </div>
       ))}
