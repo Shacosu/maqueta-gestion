@@ -1,5 +1,4 @@
 import React from 'react'
-import CurrencyFormat from 'react-currency-format';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
@@ -35,20 +34,20 @@ export default function GamesCard({ games, inputText, setGames }) {
           </OverlayTrigger>
           <div className="bg-white min-h-[6rem] border-t-4 border-indigo-500 rounded-b text-sm text-black p-2">
             <label className="font-bold">Precio: </label>
-            <span className="font-bold bg-purple-800 text-white px-2"><CurrencyFormat value={price} displayType={'text'} thousandSeparator="." decimalSeparator="" prefix={'$'} renderText={value => value} /></span>
+            <span className="font-bold bg-purple-800 rounded text-white px-2">{new Intl.NumberFormat('es-CL', {currency: 'CLP', style: 'currency', prefix: "$"}).format(price)}</span>
             <label className="font-bold mb-2 block">Categorías: </label>
             <span className="bg-green-500 text-white px-4 py-1 font-bold">{category.name}</span>
             <div>
               {(() => {
                 switch (provider) {
                   case "juegosdigitaleschile.com": 
-                  return <a href={url} target="_blank" className="block text-center bg-yellow-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  return <a href={url} target="_blank" className="block text-center bg-yellow-600 hover:bg-yellow-700 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                   case "chilejuegosdigitales.cl":
-                  return <a href={url} target="_blank" className="block text-center bg-red-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  return <a href={url} target="_blank" className="block text-center bg-red-600 hover:bg-red-900 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                   case "eneba.com":
-                  return <a href={url} target="_blank" className="block text-center bg-purple-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                  return <a href={url} target="_blank" className="block text-center bg-purple-600 hover:bg-purple-700 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                   default:
-                    return <a href={url} target="_blank" className="block text-center bg-green-600 p-1 text-white uppercase font-bold mt-2">{provider}</a>;
+                    return <a href={url} target="_blank" className="block text-center bg-green-600 hover:bg-green-600 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                 }
               })()}
             </div>

@@ -5,17 +5,17 @@
   "type": "module",
   "scripts": {
     "backend": "cd C:/Users/Shacosu/Desktop/Gestion de Proyecto/Api && nodemon",
-    "dev": "concurrently \"npm run backend\" \"vite\" ",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
-    "react-currency-format": "^1.1.0",
     "react-dom": "^18.2.0",
     "react-top-loading-bar": "^2.3.1"
   },

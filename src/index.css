@@ -10,7 +10,7 @@ body, html {
 }
 
 .fondos{
-    background-image: url('./assets/img/iluminado.jpg');
+    background-image: url('./assets/img/iluminado.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
