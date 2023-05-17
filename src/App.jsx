@@ -42,9 +42,7 @@ function App() {
   async function handleFilter(categoryName = "") {
     setGames([]);
     startSpinner()
-    const { data: gamesFilter } = await axios(
-      gamesPath
-    );
+    const { data: gamesFilter } = await axios(gamesPath);
     let filterList = gamesFilter.filter(
       ({ category }) => category.name === categoryName
     );
