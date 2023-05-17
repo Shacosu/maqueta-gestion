@@ -15,7 +15,7 @@ export default function Pagination({
       {pages.map((page, index) => (
         <button
           key={index}
-          className={`bg-white text-black text-white p-2 px-4 rounded font-bold border-black mb-2  ${currentPage === page && 'bg-yellow-500 !text-white'}`}
+          className={`bg-white text-black p-2 px-4 rounded font-bold border-black mb-2  ${currentPage === page && 'bg-yellow-500 !text-white'}`}
           onClick={() => setCurrentPage(page)}
         >
           {page}
