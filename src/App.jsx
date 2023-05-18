@@ -65,8 +65,8 @@ function App() {
 
   return (
     <div className="fondos">
+     <SearchInput categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
       <div className="container mx-auto p-10">
-      <SearchInput categories={categories} handleFilter={handleFilter} setInputText={setInputText} />
       {!!loading && <Spinner />}
       <GamesCard games={games} inputText={inputText} setGames={setGames}/>
       <Pagination

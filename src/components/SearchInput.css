@@ -1,0 +1,51 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,600&display=swap');
+
+
+
+
+.nav_brand{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.nav_menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap:3rem;
+   
+   
+   
+    
+}
+.header-container{
+    background-color: rgb(57, 3, 75);
+    height: 95px;
+
+}
+
+.nav ul li:before{
+  content: "";
+  height: 3px;
+  width: 0%;
+  background: rgb(245, 213, 6);   
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  transition: 0.4s ease-out;
+}
+
+.nav ul li:hover::before{
+    width: 100%;
+}
+.nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+
+
+
+
