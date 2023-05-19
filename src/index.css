@@ -5,13 +5,36 @@
 @tailwind utilities;
 
 
-body, html {
+body,
+html {
     font-family: 'Open Sans', sans-serif;
 }
 
-.fondos{
+.fondos {
     background-image: url('./assets/img/iluminado.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.nav-effect ul li:before {
+    content: "";
+    height: 3px;
+    width: 0%;
+    background: rgb(245, 213, 6);
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+}
+
+.nav-effect ul li:hover::before {
+    width: 100%;
+}
+
+.nav-effect ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
 }
