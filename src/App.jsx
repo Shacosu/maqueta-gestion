@@ -47,7 +47,7 @@ function App() {
       ({ category }) => category.name === categoryName
     );
     if (categoryName !== "TODOS") {
-      setGames(filterList);
+      setGames(games);
     } else {
       setGames(gamesFilter);
     }
@@ -76,7 +76,7 @@ function App() {
         <Header categories={categories} handleFilter={handleFilter} setInputText={setInputText} games={games} />
         <div className="container mx-auto p-10">
           <LoadingBar color="#f11946" ref={ref} shadow={true} />
-            <GamesCard games={games} inputText={inputText} setGames={setGames} />
+          {games && <GamesCard games={games} inputText={inputText} setGames={setGames} />}
           <Pagination
             totalGames={games.length}
             gamesPerPage={gamesPerPage}

@@ -40,7 +40,7 @@ export default function GamesCard({ games, inputText, setGames }) {
               {(() => {
                 switch (provider) {
                   case "juegosdigitaleschile.com": 
-                  return <a href={price !== 0 && url} target="_blank" className={`block text-center bg-yellow-600 hover:bg-yellow-700 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>{provider}</a>;
+                  return <a href={price !== 0 ? url : null} target="_blank" className={`block text-center bg-yellow-600 hover:bg-yellow-700 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>{provider}</a>;
                   case "chilejuegosdigitales.cl":
                   return <a href={url} target="_blank" className="block text-center bg-red-600 hover:bg-red-900 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                   case "eneba.com":
