@@ -5,6 +5,7 @@ import Pagination from "./components/Pagination";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoadingBar from 'react-top-loading-bar'
+import SkeletonCard from "./components/SkeletonCard";
 
 
 function App() {
@@ -62,21 +63,21 @@ function App() {
   const [gamesList, setGamesList] = useState("");
   const [inputText, setInputText] = useState("");
 
-  const preloadSpinner = document.querySelector("#preloadSpinner");
-  if (preloadSpinner) {
-    setTimeout(() => {
-      preloadSpinner.style.display = "none";
-      setIsLoading(false);
-    }, 1000);
-  }
+  // const preloadSpinner = document.querySelector("#preloadSpinner");
+  // if (preloadSpinner) {
+  //   setTimeout(() => {
+  //     preloadSpinner.style.display = "none";
+  //     setIsLoading(false);
+  //   }, 1000);
+  // }
   
   return (
     <>
-      {!loading ? <div className="fondos">
+       <div className="fondos">
         <Header categories={categories} handleFilter={handleFilter} setInputText={setInputText} games={games} />
         <div className="container mx-auto p-10">
           <LoadingBar color="#f11946" ref={ref} shadow={true} />
-          {games && <GamesCard games={games} inputText={inputText} setGames={setGames} />}
+          {games.length > 0 ? <GamesCard games={games} inputText={inputText} setGames={setGames} /> : <SkeletonCard />}
           <Pagination
             totalGames={games.length}
             gamesPerPage={gamesPerPage}
@@ -85,7 +86,7 @@ function App() {
           />
           <Footer />
         </div>
-      </div> : null}
+      </div>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchInput from "./SearchInput"
+import Skeleton from "react-loading-skeleton";
 import { ClockIcon } from '@heroicons/react/24/solid';
 
 export default function Header({ categories, handleFilter, setInputText, games }) {
@@ -12,8 +13,8 @@ export default function Header({ categories, handleFilter, setInputText, games }
       <div>
 
       </div>
-      <nav className="col-span-12 flex items-center gap-4 bg-gray-800 min-h-20 p-4 ">
-        <div className="flex items-center col-span-12 w-full">
+      <nav className="col-span-12 flex items-center  gap-4 bg-gray-800 min-h-20 p-4 ">
+        <div className="flex items-center justify-around w-full px-4">
           <img src="https://cdn.discordapp.com/attachments/1092700290840543252/1106334861775618088/Logo.png" alt="logo" className="w-20" />
           <h1 className="text-3xl font-black ">KrapyGames</h1>
           <ul className="col-span-12 flex gap-4 ml-4">
@@ -32,11 +33,11 @@ export default function Header({ categories, handleFilter, setInputText, games }
 
       </nav>
       <div className="col-span-12 flex justify-center gap-10 bg-slate-700 h-10 items-center">
-        {categories.map(({ _id, name }) => (
+        {categories.length > 0 ? categories.map(({ _id, name }) => (
           <div key={_id}>
             <button className='border-b-2 border-transparent hover:border-yellow-500 hover:w-full transition-all duration-500 text-lg' onClick={() => handleFilter(name)}>{name}</button>
           </div>
-        ))}
+        )): Array(5).fill(0).map((_, index) => <Skeleton width={45} height={25} key={index} />)}
       </div>
     </header>
   )
