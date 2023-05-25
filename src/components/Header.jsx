@@ -32,13 +32,16 @@ export default function Header({ categories, handleFilter, setInputText, games }
 
 
       </nav>
-      <div className="col-span-12 flex justify-center gap-10 bg-slate-700 h-10 items-center">
+      <div className="col-span-12 flex justify-center gap-10 bg-slate-700 h-10 items-center nav-effect">
+        <ul>
         {categories.length > 0 ? categories.map(({ _id, name }) => (
-          <div key={_id}>
-            <button className='border-b-2 border-transparent hover:border-yellow-500 hover:w-full transition-all duration-500 text-lg' onClick={() => handleFilter(name)}>{name}</button>
-          </div>
+          <li key={_id} onClick={() => handleFilter(name)} className="cursor-pointer text-lg">
+            {name}
+          </li>
         )): Array(5).fill(0).map((_, index) => <Skeleton width={45} height={25} key={index} />)}
+        </ul>
       </div>
+      
     </header>
   )
 }

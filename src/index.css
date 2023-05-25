@@ -19,12 +19,12 @@ html {
 
 .nav-effect ul li:before {
     content: "";
-    height: 3px;
+    height: 2px;
     width: 0%;
     background: rgb(245, 213, 6);
     position: absolute;
     left: 0;
-    bottom: -12px;
+    bottom: -4px;
     transition: 0.4s ease-out;
 }
 
