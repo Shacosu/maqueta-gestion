@@ -29,6 +29,7 @@ export default function GamesCard({ games, inputText }) {
             <picture className="relative">
               <img src={image} alt={`img-${title}`} loading="lazy" className="h-[18rem] w-full object-fit rounded-t" />
               {/* <span className="absolute top-0 end-0 bg-yellow-500 p-2 rounded cursor-pointer">❤️</span> */}
+              {/* {price === 0 ? <span className="absolute right-0 top-0  bg-yellow-500 p-2 rounded cursor-pointer">No disponible</span> : null} */}
             </picture>
           </OverlayTrigger>
           <div className="bg-white min-h-[6rem] border-t-4 border-indigo-500 rounded-b text-sm text-black p-2">
@@ -49,7 +50,10 @@ export default function GamesCard({ games, inputText }) {
                     return <a href={url} target="_blank" className="block text-center bg-green-600 hover:bg-green-600 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                 }
               })()} */}
-              <a href={price !== 0 ? url : null} target="_blank" className={`block text-center uppercase bg-purple-800 hover:bg-purple-900 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>{provider.replace(/\.(com|org|cl)\b/g, "").replace("www.", "")}</a>
+              <a href={price !== 0 ? url : null} target="_blank" 
+              className={`block text-center uppercase bg-purple-800 hover:bg-purple-900 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>
+                {provider.replace(/\.(com|org|cl)\b/g, "").replace("www.", "")}
+              </a>
             </div>
           </div>
         </div>
