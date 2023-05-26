@@ -48,7 +48,7 @@ function App() {
       ({ category }) => category.name === categoryName
     );
     if (categoryName !== "TODOS") {
-      setGames(games);
+      setGames(filterList);
     } else {
       setGames(gamesFilter);
     }

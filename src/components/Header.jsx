@@ -38,7 +38,25 @@ export default function Header({ categories, handleFilter, setInputText, games }
           <li key={_id} onClick={() => handleFilter(name)} className="cursor-pointer text-lg">
             {name}
           </li>
-        )): Array(5).fill(0).map((_, index) => <Skeleton width={45} height={25} key={index} />)}
+        )): (
+          <ul>
+            <li className="text-lg">
+              <Skeleton width={45} height={20} />
+            </li>
+            <li className="text-lg">
+              <Skeleton width={45} height={20} />
+            </li>
+            <li className="text-lg">
+              <Skeleton width={45} height={20} />
+            </li>
+            <li className="text-lg">
+              <Skeleton width={45} height={20} />
+            </li>
+            <li className="text-lg">
+              <Skeleton width={45} height={20} />
+            </li>
+          </ul>
+        )}
         </ul>
       </div>
       

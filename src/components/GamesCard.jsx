@@ -8,7 +8,6 @@ export default function GamesCard({ games, inputText }) {
     games = games.sort((a, b) => a.price < b.price ? -1 : 1).filter((game) => {
       return game.title.toLowerCase().includes(inputText.toLowerCase())
     })
-
   }
 
 
@@ -50,7 +49,7 @@ export default function GamesCard({ games, inputText }) {
                     return <a href={url} target="_blank" className="block text-center bg-green-600 hover:bg-green-600 p-1 text-white rounded font-bold mt-2">{provider}</a>;
                 }
               })()} */}
-              <a href={price !== 0 ? url : null} target="_blank" className={`block text-center bg-purple-800 hover:bg-purple-900 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>{provider.replace(/\.(com|org|cl)\b/g, "")}</a>
+              <a href={price !== 0 ? url : null} target="_blank" className={`block text-center uppercase bg-purple-800 hover:bg-purple-900 p-1 text-white rounded font-bold mt-2 ${price === 0 ? "!bg-gray-500 cursor-not-allowed" : ''}`}>{provider.replace(/\.(com|org|cl)\b/g, "").replace("www.", "")}</a>
             </div>
           </div>
         </div>
