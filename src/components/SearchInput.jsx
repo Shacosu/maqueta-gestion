@@ -2,31 +2,28 @@ import { useEffect, useState } from 'react'
 
 export default function SearchInput({ categories, handleFilter, setInputText, games }) {
   const [text, setText] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
   function handleButtonFilter(e) {
     e.preventDefault();
-    if (text === "") return alert("Debes ingresar un texto para buscar");
     setInputText(text)
-    setIsClicked(true);
   }
 
   
-  useEffect(() => {
-    if (text === "") {
-      setInputText("")
-    }
-  }, [text])
+  // useEffect(() => {
+  //   if (text === "") {
+  //     setInputText("")
+  //   }
+  // }, [text])
 
-  const filteredGames = games.filter((x) => x.title.toLowerCase().includes(text.toLowerCase()));
+  // const filteredGames = games.filter((x) => x.title.toLowerCase().includes(text.toLowerCase()));
 
   return (
-      <form onSubmit={handleButtonFilter} className="flex justify-end gap-4 w-full relative">
+      <form onSubmit={handleButtonFilter} className="md:flex justify-end gap-4 w-full relative hidden">
         <input
           type="search"
           placeholder="Buscar juego..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="p-2 rounded outline-none w-1/6 text-black"
+          className="p-2 rounded outline-none md:w-3/12 text-black"
         />
         <div className="absolute top-10 z-10 bg-white">
           {/* {isClicked && text && filteredGames.map(({ title, image, price }, idx) => (

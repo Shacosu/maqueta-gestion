@@ -6,16 +6,15 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoadingBar from 'react-top-loading-bar'
 import SkeletonCard from "./components/SkeletonCard";
-import { FloatingWhatsApp } from 'react-floating-whatsapp';
+import FakeBanner from "./components/FakeBanner"
 
 
 function App() {
   const [games, setGames] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [loading, setIsLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesPerPage, setGamesPerPage] = useState(4);
+  const [category, setCategory] = useState("TODOS");
 
 
   const ref = useRef(null);
@@ -44,6 +43,7 @@ function App() {
   async function handleFilter(categoryName = "") {
     setGames([]);
     startSpinner()
+    setCategory(categoryName);
     const { data: gamesFilter } = await axios(gamesPath);
     let filterList = gamesFilter.filter(
       ({ category }) => category.name === categoryName
@@ -53,6 +53,7 @@ function App() {
     } else {
       setGames(gamesFilter);
     }
+    window.scrollTo(0, 0)
     stopSpinner();
   }
 
@@ -64,19 +65,11 @@ function App() {
   const [gamesList, setGamesList] = useState("");
   const [inputText, setInputText] = useState("");
 
-  // const preloadSpinner = document.querySelector("#preloadSpinner");
-  // if (preloadSpinner) {
-  //   setTimeout(() => {
-  //     preloadSpinner.style.display = "none";
-  //     setIsLoading(false);
-  //   }, 1000);
-  // }
   
   return (
-    <>
-       <div className="fondos">
-        <Header categories={categories} handleFilter={handleFilter} setInputText={setInputText} games={games} />
-        <div className="container mx-auto p-10">
+       <div className="bg-[url('src/assets/img/wickedbackground.svg')]  min-h-screen bg-cover">
+        <Header categories={categories} handleFilter={handleFilter} setInputText={setInputText} games={games} category={category} />
+        <div className="container mx-auto ">
           <LoadingBar color="#f11946" ref={ref} shadow={true} />
           {games.length > 0 ? <GamesCard games={games} inputText={inputText} setGames={setGames} /> : <SkeletonCard />}
           <Pagination
@@ -85,10 +78,11 @@ function App() {
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
           />
-          <Footer />
+          
+          
         </div>
+        <Footer />
       </div>
-    </>
   )
 }
 
