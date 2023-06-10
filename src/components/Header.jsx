@@ -16,8 +16,8 @@ export default function Header({ categories, handleFilter, setInputText, games, 
       </div>
       <nav className="col-span-12 flex items-center  gap-4 bg-gray-800 min-h-20 p-4 ">
         <div className="flex items-center w-full  px-8">
-          <img src="https://cdn.discordapp.com/attachments/1092700290840543252/1106334861775618088/Logo.png" alt="logo" className="w-20" />
-          <h1 className="text-xl font-black ">KrapyGames</h1>
+          <img src="https://cdn.discordapp.com/attachments/1092700290840543252/1106334861775618088/Logo.png" alt="logo" className="w-24 bg-gray-50 p-2 rounded-full border-green-500 border-2" />
+          <h1 className="text-xl font-black ml-2">KrapyGames</h1>
           <ul className="col-span-12 flex gap-4 ml-4">
             <li>
               <a href="/" className="font-bold hover:text-yellow-500">Inicio</a>
